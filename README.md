@@ -50,7 +50,7 @@ git checkout (branchname)
 git remote -v
 ```
 
-###Note:
+### Note:
 > `git push -u origin master` 
 > 裡面的`master` 記得替換成`branchname`
 >
