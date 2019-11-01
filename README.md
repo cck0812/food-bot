@@ -5,16 +5,11 @@
 - Dcard
 - PTT
 - 痞客邦
+- 愛食記
+- Walker旅遊美食網
 
-## Task:
-Crews| 10/8-10/14<br> | 10/20-10/30<br>
-------|-------|-------
-John | - MongoDB <br>- Ptt | Web design
-Joy | - Dcard | DataBase-connect
-Derek | - PTT | Pixnet-crawler
-Angel | - Dcard | Data Mining
-明 | - PTT | DataBase-construction
-榮 | - Dcard | Instagram-crawler
+## Task manage site:
+<https://trello.com/b/GyByiAQj/db104-g1>
 
 ## Useful Resources 
 > IG scraper : <https://github.com/rarcega/instagram-scraper> <br>
