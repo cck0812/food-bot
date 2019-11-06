@@ -19,7 +19,7 @@
 > Dcard-crawler : <https://github.com/leVirve/dcard-spider>
 
 ## Concept
-![concept](./prototype.png)
+![concept](./DB104G1_concept.png)
 
 ## Reference :memo:
 ### git branch
