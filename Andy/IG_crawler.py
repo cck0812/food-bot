@@ -1,4 +1,5 @@
 import multiprocessing as mp
+from builtins import range
 from multiprocessing import Queue
 import time
 import re
