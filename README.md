@@ -17,8 +17,8 @@ igcol = igdb['ig01']
 
 ## 新增資料
 ### 因為目前檔案都是會有一個數字當成主KEY，必須用STR的數字將字典一個一個提出再存進mongo，所以使用for迴圈將資料一筆一筆存進去
-for i in range(len(ifooddata)):
-    ifoodcol.insert_one(ifooddata[str(i)])
+>for i in range(len(ifooddata)):
+>>ifoodcol.insert_one(ifooddata[str(i)])
 ### 儲存的參數為 col_name.insert_one(資料變數[KEY])
 
 ## 資料查詢
@@ -43,11 +43,11 @@ myquery = { "name": { "$regex": "^R" } }
 
 ## 刪除
 >x = mycol.delete_many({條件})
-x = mycol.delete_many({})  <font color=red size=72>條件為空則刪除collection中所有內容</font>
+>x = mycol.delete_many({})  <font color=red size=72>條件為空則刪除collection中所有內容</font>
 
 ## 修改
 >update_one({條件1},{條件2})     修改查詢到的第一筆
-update_many({條件1},{條件2})    修改查詢到的所有筆數
+>update_many({條件1},{條件2})    修改查詢到的所有筆數
 
 
 ## 創建新DB
