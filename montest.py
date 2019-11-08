@@ -10,3 +10,12 @@ db.name
 
 for i in mycol.find():        #讀出col裡的資料(db.col.find())
     print(i)
+
+    >> > import urllib.parse
+    >> > username = urllib.parse.quote_plus('user')
+    >> > username
+    'user'
+    >> > password = urllib.parse.quote_plus('pass/word')
+    >> > password
+    'pass%2Fword'
+    >> > MongoClient('mongodb://%s:%s@127.0.0.1' % (username, password))
