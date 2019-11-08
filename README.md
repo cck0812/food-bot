@@ -46,8 +46,8 @@ myquery = { "name": { "$regex": "^R" } }
 > x = mycol.delete_many({})  <font color=red>條件為空則刪除collection中所有內容</font>  
 
 ## 修改
-> update_one({條件1},{條件2})     修改查詢到的第一筆  
-> update_many({條件1},{條件2})    修改查詢到的所有筆數  
+> update_one({條件1},{條件2})         修改查詢到的第一筆  
+> update_many({條件1},{條件2})        修改查詢到的所有筆數  
 
 
 ## 創建新DB
