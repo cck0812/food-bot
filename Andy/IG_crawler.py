@@ -38,7 +38,7 @@ def pre_crawler(pre_crawler_id, tag_jq, url_jq, options):
             driver.execute_script("window.scrollBy(0,10000)")
             time.sleep(1.5)
 
-        driver.close()
+        driver.quit()
         print(f'pre_crawler {pre_crawler_id} finished tag {tag}')
         print(f'History length = {len(history)}')
 
@@ -74,7 +74,7 @@ def final_crawler(final_crawler_id, url_jq, data_q, options):
 
                     data_q.put([link, author, location, likes, post_time, tags, text])
 
-            driver1.close()
+            driver1.quit()
             print(f'final_crawler {final_crawler_id} finished url {link}')
         except:
             pass
@@ -121,9 +121,9 @@ def main():
 
 if __name__ == "__main__":
 
-    tag_list = ['台北早午餐', '台北小吃', '台北早餐', '台北下午茶', '台北甜點']
+    tag_list = ['嘉義美食地圖', '嘉義美食', '嘉義甜點', '嘉義早午餐', '嘉義下午茶']
 
     # Remember to add ".json" at the end of the file name 'cause the output is json file >ω<
-    save_path = f'C:\\Users\\Big data\\Desktop\\IG_台北.json'
+    save_path = f'C:\\Users\\Big data\\Desktop\\data\\IG\\IG_嘉義市.json'
 
     main()

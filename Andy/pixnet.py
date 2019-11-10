@@ -81,7 +81,7 @@ def final_crawler(final_id, url_jq, data_q, options):
                 driver.close()
             except:
                 hit = ''
-                driver.close()
+                driver.quit()
 
             data_q.put([link, title, author, post_date, hit, tag, word])
 
