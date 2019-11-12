@@ -21,7 +21,7 @@ def crawl_text(crawler_id, page_jq, q, data_q, newest_page, page_range):
         try:
             shop_name = soup.select('h1[itemprop="name"]')[0].text[:-1]
         except:
-            continue
+            shop_name = ''
         try:
             phone = soup.select('span[itemprop="telephone"]')[0].text
         except:
