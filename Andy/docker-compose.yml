@@ -1,0 +1,71 @@
+version: '3.1'
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    hostname: mongodb
+    volumes:
+      - db-data:/data/db
+    restart: always
+    expose:
+      - 6016
+    ports:
+      - "27017:27017"
+    deploy:
+      replicas: 1
+      update_config:
+        failure_action: rollback
+
+
+#   python-walker:
+#     # build:
+#     #   context: ./dockerfile_dir
+#     #   dockerfile: dockerfile-python
+#     image: cck0812/python-basic
+#     container_name: python-walker
+#     depends_on:
+#       - mongo
+#     volumes:
+#       - $PWD:/usr/src/app
+#     command: ["python", "walkerland_restaurants_thread.py"]
+
+#   # python-ig:
+#   #   build:
+#   #     context: ./dockerfile_dir
+#   #     dockerfile: dockerfile-python
+#   #   # image: cck0812/python-basic
+#   #   container_name: python-ig
+#   #   volumes:
+#   #     - $PWD:/usr/src/app
+#   #   command: ["python", "IG_crawler_thread.py"]
+
+
+#   python-pixnet:
+#     # build:
+#     #   context: ./dockerfile_dir
+#     #   dockerfile: dockerfile-python
+#     image: cck0812/python-basic
+#     container_name: python-pixnet
+#     volumes:
+#       - $PWD:/usr/src/app
+#     command: ["python", "pixnet_thread.py"]
+
+
+#   python-ifood:
+#     # build:
+#     #   context: ./dockerfile_dir
+#     #   dockerfile: dockerfile-python
+#     image: cck0812/python-basic
+#     container_name: python-ifood
+#     depends_on:
+#       - mongo
+#     volumes:
+#       - $PWD:/usr/src/app
+#     command: ["python", "ifood_restaurants_thread.py"]
+
+
+# networks:
+#     frontend:
+#     backend:
+volumes:
+    db-data:
