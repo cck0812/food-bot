@@ -2,70 +2,59 @@ version: '3.1'
 services:
   mongo:
     image: mongo
-    container_name: mongodb
     hostname: mongodb
     volumes:
       - db-data:/data/db
-    restart: always
-    expose:
-      - 6016
     ports:
       - "27017:27017"
+    networks:
+      backend:
+        aliases:
+          - mongodb
     deploy:
       replicas: 1
       update_config:
         failure_action: rollback
+      placement:
+        constraints: [node.role == manager]
 
 
-#   python-walker:
-#     # build:
-#     #   context: ./dockerfile_dir
-#     #   dockerfile: dockerfile-python
-#     image: cck0812/python-basic
-#     container_name: python-walker
-#     depends_on:
-#       - mongo
-#     volumes:
-#       - $PWD:/usr/src/app
-#     command: ["python", "walkerland_restaurants_thread.py"]
+  python-walker:
+    image: cck0812/walker
+    networks:
+      - backend
+    depends_on:
+      - mongo
+    command: ["python", "walkerland_restaurants_thread.py"]
 
-#   # python-ig:
-#   #   build:
-#   #     context: ./dockerfile_dir
-#   #     dockerfile: dockerfile-python
-#   #   # image: cck0812/python-basic
-#   #   container_name: python-ig
-#   #   volumes:
-#   #     - $PWD:/usr/src/app
-#   #   command: ["python", "IG_crawler_thread.py"]
+  # python-ig:
+  #   image: cck0812/python-basic
+  #   container_name: python-ig
+  #   volumes:
+  #     - $PWD:/usr/src/app
+  #   command: ["python", "IG_crawler_thread.py"]
 
 
-#   python-pixnet:
-#     # build:
-#     #   context: ./dockerfile_dir
-#     #   dockerfile: dockerfile-python
-#     image: cck0812/python-basic
-#     container_name: python-pixnet
-#     volumes:
-#       - $PWD:/usr/src/app
-#     command: ["python", "pixnet_thread.py"]
+  python-pixnet:
+    image: cck0812/pixnet
+    networks:
+      - backend
+    depends_on:
+      - mongo
+    command: ["python", "pixnet_thread.py"]
 
 
-#   python-ifood:
-#     # build:
-#     #   context: ./dockerfile_dir
-#     #   dockerfile: dockerfile-python
-#     image: cck0812/python-basic
-#     container_name: python-ifood
-#     depends_on:
-#       - mongo
-#     volumes:
-#       - $PWD:/usr/src/app
-#     command: ["python", "ifood_restaurants_thread.py"]
+  python-ifood:
+    image: cck0812/ifood
+    networks:
+      - backend
+    depends_on:
+      - mongo
+    command: ["python", "ifood_restaurants_thread.py"]
 
 
-# networks:
-#     frontend:
-#     backend:
+networks:
+    frontend:
+    backend:
 volumes:
     db-data:
