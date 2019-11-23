@@ -1,0 +1,26 @@
+
+vi ["要使用的.sh檔案"]
+貼入下方的code
+
+#!/bin/bash
+cd /food/food/
+while true
+do
+ fc="$(ls | wc -l)"
+ if [ $fc -gt 0 ];
+   then
+    FILES=/food/food/*
+    for f in $FILES
+    do
+     hadoop fs -put * /food
+    done
+ fi;
+ rm -rf /food/food/*
+ sleep 3
+done
+
+
+
+輸入指定sh ["剛剛vi創建的.sh檔案"]
+
+在FILES輸入的目錄丟入檔案
