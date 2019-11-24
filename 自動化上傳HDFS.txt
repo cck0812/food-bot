@@ -1,6 +1,37 @@
+(開啟docker)
+systemctl start docker
 
-vi ["要使用的.sh檔案"]
-貼入下方的code
+(下載老師的檔案)
+cd /tmp; git clone https://github.com/orozcohsu/webRecommend.git
+
+(檢查有沒有已啟動的Hadoop,如果有就殺掉,沒有就直接下一步就可)
+docker ps -a
+
+(啟動Hadoop)
+cd /tmp/webRecommend/; docker-compose up -d
+
+(進入Hadoop)
+docker exec -it hadoop bash
+
+(看看Hadoop是否成功啟動)
+http://localhost:50070
+
+(創一個用來上傳資料的資料夾)
+(Hadoop上的資料夾)
+hadoop fs -mkdir /food
+
+(虛擬機上的資料夾)
+cd ~
+mkdir -p /food/food/
+
+(cd到資料夾建立用來自動化上傳HDFS的程式)
+cd /food
+touch puth_cxcxc.sh
+
+(編輯程式)
+vi puth_cxcxc.sh
+
+(貼入下方的code)
 
 #!/bin/bash
 cd /food/food/
@@ -19,8 +50,16 @@ do
  sleep 3
 done
 
+(runing程式之後放著給程式執行)
+sh puth_cxcxc.sh
 
+(同一個虛擬機再開一個視窗測試上傳)
 
-輸入指定sh ["剛剛vi創建的.sh檔案"]
+(進入Hadoop)
+docker exec -it hadoop bash
 
-在FILES輸入的目錄丟入檔案
+(進入要測試上傳的檔案丟看看檔案是否有上傳成功)
+cd /food/food/
+touch 123
+touch 456
+(到http://localhost:50070查看)
