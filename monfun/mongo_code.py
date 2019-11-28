@@ -24,9 +24,9 @@ def locin(urcol,urdata):
     for i in urdata:                                                    #單筆匯入
         urcol.insert_one(i)
 
-def locfind(urcol,**w_data,**w_document,idnum):
-    for i in urcol.find(w_data,w_document):
-        print(i)
+# def locfind(urcol,**w_data,**w_document,idnum):
+#     for i in urcol.find(w_data,w_document):
+#         print(i)
 
 db.createUser(
     {
