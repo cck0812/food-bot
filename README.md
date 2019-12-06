@@ -7,7 +7,9 @@ import os
 import json
 
 ### 讀取本地mongo位置
-myclient = pymongo.MongoClient('mongodb://localhost:27017')      
+myclient = pymongo.MongoClient('mongodb://localhost:27017')   
+#### Joy的Mongo位置
+myclient = pymongo.MongoClient('10.120.38.33',27017)
 ### 讀取DB名字
 dblist = myclient.list_database_names()                                                            
 ### 讀取名為 igdb 的db(use db_name)
