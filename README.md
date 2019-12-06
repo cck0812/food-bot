@@ -2,9 +2,7 @@
 
 
 
-import pymongo		
-import os		
-import json		
+import pymongo,os,json		
 
 ### 讀取本地mongo位置
 myclient = pymongo.MongoClient('mongodb://localhost:27017')   
