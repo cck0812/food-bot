@@ -1,0 +1,48 @@
+FROM alpine:latest
+
+ENV DAEMON_RUN=true
+ENV SPARK_VERSION=2.4.4
+ENV HADOOP_VERSION=2.6
+ENV SCALA_VERSION=2.12.4
+ENV SCALA_HOME=/usr/share/scala
+
+RUN apk update    
+
+RUN apk add --no-cache --virtual=.build-dependencies wget ca-certificates
+RUN apk add --no-cache python3
+RUN mv /usr/bin/python3 /usr/bin/python
+RUN apk --no-cache --update-cache add gcc gfortran python3-dev build-base wget freetype-dev libpng-dev openblas-dev
+RUN pip3 install --upgrade pip
+#RUN apk --no-cache add musl-dev linux-headers g++
+#RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
+RUN pip install bs4 requests fake_useragent selenium numpy pyspark pymongo 
+RUN pip install python-dateutil==2.8.1
+RUN pip install pytz==2019.3
+RUN pip install six==1.13.0
+RUN pip install pandas
+
+RUN apk add --no-cache bash curl jq && \
+    cd "/tmp" && \
+    wget --no-verbose "https://downloads.typesafe.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.tgz" && \
+    tar xzf "scala-${SCALA_VERSION}.tgz" && \
+    mkdir "${SCALA_HOME}" && \
+    rm "/tmp/scala-${SCALA_VERSION}/bin/"*.bat && \
+    mv "/tmp/scala-${SCALA_VERSION}/bin" "/tmp/scala-${SCALA_VERSION}/lib" "${SCALA_HOME}" && \
+    ln -s "${SCALA_HOME}/bin/"* "/usr/bin/" && \
+    apk del .build-dependencies && \
+    rm -rf "/tmp/"*
+
+RUN apk add --no-cache openjdk8
+
+#Scala instalation
+RUN export PATH="/usr/local/sbt/bin:$PATH" &&  apk update && apk add ca-certificates wget tar && mkdir -p "/usr/local/sbt" && wget -qO - --no-check-certificate "https://piccolo.link/sbt-0.13.16.tgz" | tar xz -C /usr/local/sbt --strip-components=1 && sbt sbtVersion
+
+RUN wget --no-verbose http://ftp.ntu.edu.tw/Apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
+      && mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark \
+      && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
+
+
+
+
+
+
