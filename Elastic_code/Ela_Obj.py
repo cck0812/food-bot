@@ -183,12 +183,12 @@ class ElasticObj:
         res = self.es.get(index=self.index_name, doc_type=self.index_type,id=id)
         print(res)
 
-
-    '''
-    先別用~~~~~~先別用~~~~~~先別用~~~~~~先別用~~~~~~
-    '''
     def Get_Data_By_Body(self,data):
-        # doc = {'query': {'match_all': {}}}
+        # res = self.es.search(index=self.index_name,body={"query": {"match": {'文章內容':data}}})
+        # for hit in res['hits']['hits']:
+        #     print(hit)
+
+
         doc = {
             "query": {
                 "match": {
@@ -196,18 +196,24 @@ class ElasticObj:
                 }
             }
         }
-        _searched = self.es.search(index=self.index_name, doc_type=self.index_type, body=doc)
+        searched = self.es.search(index=self.index_name, body=doc)
 
-        for hit in _searched['hits']['hits']:
-            # print hit['_source']
-            print(hit['_source']['date'], hit['_source']['source'], hit['_source']['link'], hit['_source']['keyword'],hit['_source']['title'])
+        for hit in searched['hits']['hits']:
+            print(hit)
+            # print(hit['_source']['date'], hit['_source']['source'], hit['_source']['link'], hit['_source']['keyword'],hit['_source']['title'])
 
     def Update_data(self,id,data):
         result = self.es.update(index=self.index_name, doc_type=self.index_type,id=id , body=data)
         print(result)
 
 
-obj =ElasticObj("ott","ott_type",ip ="47.93.117.127")
+
+es =ElasticObj("test","elk",ip ="192.168.236.129")
+
+
+es.Get_Data_By_Body("燒肉")
+
+
 # obj = ElasticObj("ott1", "ott_type1")
 # obj.create_index()
 # obj.Index_Data()
