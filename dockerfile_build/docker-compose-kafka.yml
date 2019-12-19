@@ -8,6 +8,10 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
     networks:
       cluster:
         aliases:
@@ -35,6 +39,10 @@ services:
       # `offsets.topic.replication.factor` (default: 3)
       # is now enforced upon topic creation
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.labels.kafka == true]
     networks:
       cluster:
         aliases:

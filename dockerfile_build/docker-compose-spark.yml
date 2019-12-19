@@ -7,6 +7,10 @@ services:
     ports:
       - "9090:8080"
       - "7077:7077"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.labels.spark == true]
     networks:
       cluster:
         aliases:
@@ -20,6 +24,10 @@ services:
       - "8081:8081"
     environment:
       - SPARK_MASTER=spark://spark-master:7077
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
     networks:
       cluster:
         aliases:
