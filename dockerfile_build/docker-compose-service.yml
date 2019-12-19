@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  nifi:
+    image: cck0812/nifi
+    build:
+      context: ./dockerfile_nifi
+    ports:
+      - "8080:8080"
+    environment:
+      - NIFI_WEB_HTTP_PORT=8080
+      - NIFI_WEB_HTTP_HOST=0.0.0.0
+      - NIFI_CLUSTER_IS_NODE=false
+      - NIFI_CLUSTER_NODE_PROTOCOL_PORT=8082
+      - NIFI_ZK_CONNECT_STRING=zookeeper:2181
+      - NIFI_ELECTION_MAX_WAIT=1 min
+    networks:
+      cluster:
+        aliases:
+          - nifi
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      cluster:
+        aliases:
+          - mongodb
+    deploy:
+      replicas: 1
+      update_config:
+        failure_action: rollback
+
+
+networks:
+  cluster:
+    external: true

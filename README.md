@@ -2,8 +2,6 @@
 
 ## Source
 - IG
-- Dcard
-- PTT
 - 痞客邦
 - 愛食記
 - Walker旅遊美食網

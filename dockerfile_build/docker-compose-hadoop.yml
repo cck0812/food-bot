@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  hadoop-cluster-master:
+    container_name: hadoop-master
+    image: cck0812/cluster-hadoop:v3
+    ports:
+      - "50070:50070"
+      - "50075:50075"
+      - "8088:8088"
+      - "2222:22"
+    hostname: master
+    stdin_open: true
+    tty: true
+    networks:
+      cluster:
+        aliases:
+          - master
+
+  hadoop-cluster-slaver1:
+    container_name: hadoop-slaver1
+    image: cck0812/cluster-hadoop:v3
+    hostname: slaver1
+    stdin_open: true
+    tty: true
+    networks:
+      cluster:
+        aliases:
+          - slaver1
+
+  # hadoop-cluster-slaver2:
+  #   container_name: hadoop-slaver2
+  #   image: cck0812/cluster-hadoop:v2
+  #   hostname: slaver2
+  #   stdin_open: true
+  #   tty: true
+  #   networks:
+  #     cluster:
+  #       aliases:
+  #         - slaver2
+
+
+networks:
+  cluster:
+    external: true

@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+  spark-master:
+    image: cck0812/spark:master
+    build:
+      context: dockerfile_spark
+    ports:
+      - "9090:8080"
+      - "7077:7077"
+    networks:
+      cluster:
+        aliases:
+          - spark-master
+
+  spark-worker:
+    image: cck0812/spark:worker
+    build:
+      context: dockerfile_spark
+    ports:
+      - "8081:8081"
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+    networks:
+      cluster:
+        aliases:
+          - spark-worker
+
+
+networks:
+  cluster:
+    external: true
