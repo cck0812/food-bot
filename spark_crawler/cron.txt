@@ -1,3 +1,0 @@
-0 0,3,6,9,12,15,18,21 * * * spark-submit --master spark://spark-master:7077 /pyfile/walkerland.py
-0 1,4,7,10,13,16,19,22 * * * spark-submit --master spark://spark-master:7077 /pyfile/ifood.py
-0 2,5,8,11,14,17,20,23 * * * spark-submit --master spark://spark-master:7077 /pyfile/trip_advisor.py
